@@ -1,0 +1,23 @@
+{
+    "autoload": {
+        "psr-4": {
+            "jiyull\\": "src/"
+        }
+    },
+    "name": "jiyull/office",
+    "description": "excel、word等处理组件",
+    "type": "l",
+    "require": {
+        "phpoffice/phpexcel": "1.8.x-dev",
+        "phpoffice/phpspreadsheet": "dev-master",
+        "phpoffice/phpword": "0.19.x-dev"
+    },
+    "license": "Apache",
+    "authors": [
+        {
+            "name": "Duke",
+            "email": "287493023@qq.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
