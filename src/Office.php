@@ -61,8 +61,7 @@ class Office {
             mkdir($dir, 0755,true);
         }
         @$objWriter->save($dir . $fileName.'.xls');//此处加@忽略掉continue 2 的warning
-        var_dump($_REQUEST);die;
-        return input('server.REQUEST_SCHEME') . '://' . input('server.SERVER_NAME') . '/' . $dir . $fileName.'.xls';
+        return $serverName . '/' . $dir . $fileName.'.xls';
     }
 
 
