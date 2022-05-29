@@ -1,22 +1,19 @@
 <?php
 namespace jiyull;
 
-use PHPExcel;
-use PhpOffice\PhpWord\PhpWord;
-
 class Office {
     const EXCEL_TYPE = 1;
     const WORD_TYPE = 2;
     public function __construct($type = self::EXCEL_TYPE){
         switch ($type) {
             case self::EXCEL_TYPE:
-                $obj = new PHPExcel();
+                $obj = new \PHPExcel();
                 break;
             case self::WORD_TYPE:
-                $obj = new PhpWord();
+                $obj = new \PhpWord();
                 break;
             default:
-                $obj = new PHPExcel();
+                $obj = new \PHPExcel();
         }
         return $obj;
     }
@@ -30,13 +27,13 @@ class Office {
      * @throws \PHPExcel_Reader_Exception
      * @throws \PHPExcel_Writer_Exception
      */
-    public function exportExcel($expTitle,$expCellName,$expTableData){
+    public function exportExcel($expTitle,$expCellName,$expTableData, $serverName){
         //include_once EXTEND_PATH.'PHPExcel/PHPExcel.php';//方法二
         $fileName = $expTitle.date('_YmdHis');//or $xlsTitle 文件名称可根据自己情况设定
         $cellNum = count($expCellName);
         $dataNum = count($expTableData);
-        $objPHPExcel = new PHPExcel();//方法一
-        //$objPHPExcel = new \PHPExcel();//方法二
+        //$objPHPExcel = new PHPExcel();//方法一
+        $objPHPExcel = new \PHPExcel();//方法二
         $cellName = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','AB','AC','AD','AE','AF','AG','AH','AI','AJ','AK','AL','AM','AN','AO','AP','AQ','AR','AS','AT','AU','AV','AW','AX','AY','AZ');
         //$objPHPExcel->getActiveSheet(0)->mergeCells('A1:'.$cellName[$cellNum-1].'1');//合并单元格
         //$objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1', $expTitle.'  Export time:'.date('Y-m-d H:i:s'));
@@ -47,7 +44,7 @@ class Office {
         for($i=0;$i<$dataNum;$i++){
             for($j=0;$j<$cellNum;$j++){
                 if ($cellName[$j] == 'A') {
-                    $objPHPExcel->getActiveSheet(0)->setCellValueExplicit($cellName[$j].($i+2), $expTableData[$i][$expCellName[$j][0]], PHPExcel_Cell_DataType::TYPE_STRING);
+                    $objPHPExcel->getActiveSheet(0)->setCellValueExplicit($cellName[$j].($i+2), $expTableData[$i][$expCellName[$j][0]], \PHPExcel_Cell_DataType::TYPE_STRING);
                 } else {
                     $objPHPExcel->getActiveSheet(0)->setCellValue($cellName[$j].($i+2), $expTableData[$i][$expCellName[$j][0]]);
                 }
@@ -63,7 +60,8 @@ class Office {
         if(!is_dir($dir)) {
             mkdir($dir, 0755,true);
         }
-        $objWriter->save($dir . $fileName.'.xls');
+        @$objWriter->save($dir . $fileName.'.xls');//此处加@忽略掉continue 2 的warning
+        var_dump($_REQUEST);die;
         return input('server.REQUEST_SCHEME') . '://' . input('server.SERVER_NAME') . '/' . $dir . $fileName.'.xls';
     }
 
