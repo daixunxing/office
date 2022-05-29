@@ -12,7 +12,7 @@
         "phpoffice/phpspreadsheet": "dev-master",
         "phpoffice/phpword": "0.19.x-dev"
     },
-    "license": "Apache",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
             "name": "Duke",
