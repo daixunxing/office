@@ -66,7 +66,7 @@ $objActSheet->getCell('E26')->getHyperlink()->setTooltip( 'Navigate to website')
 ```
 
 ##注意事项
-在部署上，通常的架构是 nginx + php-fpm，对于Excel中图片比较多的数据导入需要设置加大上传文件的限制和超时时间。后续将会在专栏《面向WEB开发人员的Docker》增加 PHP 运行环境的镜像制作。
+在部署上，通常的架构是 nginx + php-fpm，对于Excel中图片比较多的数据导入需要设置加大上传文件的限制和超时时间。
 
 在文件上传上，通常会出现 413 request Entity too Large 错误，解决的办法是在 nginx 配置中增加以下配置：
 
